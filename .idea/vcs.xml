@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="IssueNavigationConfiguration">
+    <option name="links">
+      <list>
+        <IssueNavigationLink>
+          <option name="issueRegexp" value="#1" />
+          <option name="linkRegexp" value="https://github.com/Siegell/VSU-Rasp/issues/1" />
+        </IssueNavigationLink>
+        <IssueNavigationLink>
+          <option name="issueRegexp" value="#2" />
+          <option name="linkRegexp" value="https://github.com/Siegell/VSU-Rasp/issues/2" />
+        </IssueNavigationLink>
+        <IssueNavigationLink>
+          <option name="issueRegexp" value="#3" />
+          <option name="linkRegexp" value="https://github.com/Siegell/VSU-Rasp/issues/3" />
+        </IssueNavigationLink>
+        <IssueNavigationLink>
+          <option name="issueRegexp" value="#4" />
+          <option name="linkRegexp" value="https://github.com/Siegell/VSU-Rasp/issues/4" />
+        </IssueNavigationLink>
+      </list>
+    </option>
+  </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
