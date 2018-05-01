@@ -1,4 +1,4 @@
-package kotlin.core.rasp
+package kotl.core.rasp
 
 class Lesson(val date: String,
              val name: String,

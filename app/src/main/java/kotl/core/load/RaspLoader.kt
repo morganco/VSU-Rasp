@@ -1,8 +1,8 @@
-package kotlin.core.load
+package kotl.core.load
 
 import com.beust.klaxon.Klaxon
-import kotlin.core.rasp.Lesson
-import kotlin.core.rasp.Schedule
+import kotl.core.rasp.Lesson
+import kotl.core.rasp.Schedule
 
 class RaspLoader {
     fun LoadFromJSONString(JSONString: String): Schedule {
