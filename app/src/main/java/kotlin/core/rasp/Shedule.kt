@@ -1,7 +1,7 @@
-package kotlin.core.rasp
+    package kotlin.core.rasp
 
 
-class Schedule(val serial: String,
+    class Schedule(val serial: String,
                val faculty: String,
                val education_form: String,
                val week_number: String,
