@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/lectureBackground"
+        android:id="@+id/item_cell">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:text="hh:mm"
+            android:id="@+id/item_pair_time"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="@color/textcolor"/>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_pair_name"
+                android:text="@string/pair_name"
+                android:textSize="20dp"
+                android:textColor="@color/textcolor"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_teacher_name"
+                android:text="@string/teacher_name"
+                android:textSize="15dp"
+                android:textColor="@color/textcolor"/>
+        </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/item_hall_number"
+        android:text="@string/hall_number"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/textcolor"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/item_cell"
+        android:orientation="vertical"/>
+
+</android.support.constraint.ConstraintLayout>

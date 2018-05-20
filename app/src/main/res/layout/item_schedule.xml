@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle"
+    android:orientation="horizontal"
+    android:onClick="onClickShedule"
+    android:id="@+id/shedule_all">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:id="@+id/NameShedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Name of Shedule"
+                android:textColor="@color/textcolor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/NameGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:text="Group"
+                android:textColor="@color/textcolor"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/NameShedule" />
+
+            <TextView
+                android:id="@+id/NameFaculty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:text="Faculty"
+                android:textColor="@color/textcolor"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@+id/NameGroup" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/index"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:textSize="0sp"
+            android:layout_marginRight="5dp"
+            app:layout_constraintRight_toRightOf = "@id/shedule_all"
+            android:gravity="center"
+            android:onClick="onClickDeleteButton"/>
+
+</android.support.constraint.ConstraintLayout>
