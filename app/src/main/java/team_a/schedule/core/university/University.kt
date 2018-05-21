@@ -2,19 +2,21 @@ package team_a.schedule.core.university
 
 import android.content.Context
 import team_a.schedule.R
+import java.io.File
 import java.io.Serializable
 
 
 class University(val context: Context){
     private val unidata = mutableListOf<MutableList<String>>()
     fun constructor(): University{
-        val dir = context.assets.list("schedules")
+        val dir = File(context.cacheDir,"schedules").list()
         for(i in dir){
+            System.out.println(i)
             val data = mutableListOf<String>()
             data.add(i)
-            val ddir = context.assets.list("schedules/$i")
+            val ddir = File(context.cacheDir,"schedules/$i").list()
             for(j in ddir) data.add(j)
-            unidata.add(data)
+                unidata.add(data)
         }
         return this
     }

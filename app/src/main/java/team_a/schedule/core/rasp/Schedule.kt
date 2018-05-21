@@ -13,6 +13,7 @@ data class Schedule(val serial: String,
     override fun toString(): String {
         return "{" +
                 "serial:\"$serial\"," +
+                "name:\$name\","
                 "faculty:\"$faculty\"," +
                 "group:\"$group\"," +
                 "education_form:\"$education_form\"," +

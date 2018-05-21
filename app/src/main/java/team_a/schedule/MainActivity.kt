@@ -21,10 +21,14 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     var ShedulesData = mutableListOf<Schedule>()
-    val menuList = listOf("Расписания", "Преподаватели", "Деканат")
+    val menuList = listOf("Расписания", "Преподаватели")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ShedulesData = ScheduleSaveLoader().getSavedData(baseContext)
+        ShedulesData = ScheduleSaveLoader(ShedulesData).getSavedData(baseContext)
+        ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext,"data")
+        if(!File(baseContext.cacheDir,"firstlaunch").exists()){
+            File(baseContext.cacheDir,"firstlaunch").createNewFile()
+        }
         getShedulesScreen()
     }
 
@@ -91,9 +95,10 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
             }
-            val data = ScheduleSaveLoader().loadScheduleFromAssets(baseContext, "schedules/$faculty/$group")
+            val data = ScheduleSaveLoader(ShedulesData).loadScheduleFromCacheDir(baseContext,"schedules/$faculty/$group")
+            //val data = ScheduleSaveLoader(null).loadScheduleFromAssets(baseContext, "schedules/$faculty/$group")
             ShedulesData.add(Schedule(data.serial,name,faculty,group,data.education_form,data.week_number,data.pairs_list))
-            ScheduleSaveLoader().saveScheduleToCacheDir(ShedulesData[ShedulesData.size - 1],baseContext,"userdata/$name")
+            ScheduleSaveLoader(ShedulesData).saveScheduleToCacheDir(ShedulesData[ShedulesData.size - 1],baseContext,"userdata/$name")
             getShedulesScreen()
         } else {
             Toast.makeText(baseContext, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
@@ -126,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             alertDialog.setIcon(R.drawable.index)
 
             alertDialog.setPositiveButton("ДА", DialogInterface.OnClickListener { dialog, which ->
-                ScheduleSaveLoader().removeScheduleFromCacheDir(baseContext,ShedulesData[i].name)
+                ScheduleSaveLoader(ShedulesData).removeScheduleFromCacheDir(baseContext,ShedulesData[i].name)
                 ShedulesData.removeAt(i)
                 Toast.makeText(getApplicationContext(), "Удалено", Toast.LENGTH_SHORT).show()
                 getShedulesScreen()
