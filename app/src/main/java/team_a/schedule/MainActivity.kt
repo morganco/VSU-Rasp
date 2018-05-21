@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.teachers_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.teachers_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        //recyclerView.adapter = AdapterTeachers(getTeachers())
+        recyclerView.adapter = AdapterTeachers(Teacher().getTeachers(baseContext))
 
         val menurecyclerView = findViewById<RecyclerView>(R.id.menu_recycler)
         menurecyclerView.layoutManager = LinearLayoutManager(this)

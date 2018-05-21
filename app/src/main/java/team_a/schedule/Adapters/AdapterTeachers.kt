@@ -1,5 +1,6 @@
 package team_a.schedule.Adapters
 
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ class AdapterTeachers(private val values: List<Teacher>): RecyclerView.Adapter<A
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.NameView?.text = values[position].name
-        holder.ImageView?.setImageResource(values[position].image)
+        holder.ImageView?.setImageDrawable(values[position].image)
         holder.HallView?.text = values[position].hall
         holder.PhoneView?.text = values[position].phone
     }
