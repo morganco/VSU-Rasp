@@ -1,5 +1,5 @@
 package team_a.schedule.core.build.comparators
-
+/*
 import team_a.schedule.core.rasp.Lesson
 
 class LessonComparator : Comparator<Lesson> {
@@ -10,4 +10,4 @@ class LessonComparator : Comparator<Lesson> {
         else
             compare
     }
-}
+}*/

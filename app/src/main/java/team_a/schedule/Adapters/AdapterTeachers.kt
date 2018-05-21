@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import team_a.schedule.R
-import team_a.schedule.Teacher
+import team_a.schedule.core.university.Teacher
 
 
 class AdapterTeachers(private val values: List<Teacher>): RecyclerView.Adapter<AdapterTeachers.ViewHolder>() {

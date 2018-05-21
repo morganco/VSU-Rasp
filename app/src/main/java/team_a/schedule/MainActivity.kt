@@ -9,25 +9,24 @@ import android.widget.*
 import android.widget.Toast
 import android.content.DialogInterface
 import android.support.v7.app.AlertDialog
-import com.beust.klaxon.Klaxon
 import team_a.schedule.Adapters.AdapterList
 import team_a.schedule.Adapters.AdapterPairs
 import team_a.schedule.Adapters.AdapterScheduleList
 import team_a.schedule.Adapters.AdapterTeachers
+import team_a.schedule.core.load.ScheduleSaveLoader
 import team_a.schedule.core.rasp.Schedule
+import team_a.schedule.core.university.*
 
 
 class MainActivity : AppCompatActivity() {
-    val data: University = University()
     var ShedulesData = mutableListOf<Schedule>()
-    val menuList = listOf("Расписания","Преподаватели","Деканат")
+    val menuList = listOf("Расписания", "Преподаватели", "Деканат")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        elem(0)
         getShedulesScreen()
     }
 
-    fun getShedulesScreen(){
+    fun getShedulesScreen() {
         setContentView(R.layout.schedules_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.shed_r)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -38,11 +37,11 @@ class MainActivity : AppCompatActivity() {
         menurecyclerView.adapter = AdapterList(menuList)
     }
 
-    fun getTeachersScreen(){
+    fun getTeachersScreen() {
         setContentView(R.layout.teachers_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.teachers_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = AdapterTeachers(getTeachers())
+        //recyclerView.adapter = AdapterTeachers(getTeachers())
 
         val menurecyclerView = findViewById<RecyclerView>(R.id.menu_recycler)
         menurecyclerView.layoutManager = LinearLayoutManager(this)
@@ -50,9 +49,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun onClickSheduleButton(view:View){
+    fun onClickSheduleButton(view: View) {
         setContentView(R.layout.new_schedule_list)
-        val data = University()
+        val data = University(baseContext).constructor()
         val faculty_adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data.getFaculties())
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayListOf())
 
@@ -70,66 +69,32 @@ class MainActivity : AppCompatActivity() {
                 spinner.adapter = adapter
                 spinner.setSelection(0)
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
 
     }
 
-    fun onClickNewSheduleButton(view:View){
+    fun onClickNewSheduleButton(view: View) {
         val name = findViewById<EditText>(R.id.new_shedule_name).text.toString()
         val group = findViewById<Spinner>(R.id.group_spinner).selectedItem.toString()
         val faculty = findViewById<Spinner>(R.id.faculty_spinner).selectedItem.toString()
-        if(name!=""){
-                for (i in 0 until ShedulesData.size){
-                    if(name == ShedulesData[i].name){
-                        Toast.makeText(baseContext,"Такое имя уже существует",Toast.LENGTH_SHORT).show()
-                        return
-                    }
+        if (name != "") {
+            for (i in 0 until ShedulesData.size) {
+                if (name == ShedulesData[i].name) {
+                    Toast.makeText(baseContext, "Такое имя уже существует", Toast.LENGTH_SHORT).show()
+                    return
                 }
-                ShedulesData.add(Schedule("",name,faculty,null,null, Klaxon().parse<Schedule>("""{
-            "serial":"хеш",
-            "name":"123"
-            "faculty":"МиИТ",
-            "education_form":"Дневная",
-            "week_number":"",
-            "pairs_list":
-                [
-                    {
-                    "lessons":
-                        [
-                            {
-                                "date":"Дата",
-                                "name":"Название пары",
-                                "prep":"ФИО",
-                                "hall":"123",
-                                "group":"Номер группы",
-                                "sub_group":"Номер подгруппы",
-                                "type":"Тип пары",
-                                "num":"Номер пл счету"
-                            },
-                            {
-                                "date":"Дата",
-                                "name":"Название пары",
-                                "prep":"ФИО",
-                                "hall":"123",
-                                "group":"Номер группы",
-                                "sub_group":"Номер подгруппы",
-                                "type":"Тип пары",
-                                "num":"Номер пл счету"
-                            }
-                        ]
-                    }
-                ]
-        }""")!!.pairs_list))
-                getShedulesScreen()
-        }
-        else{
-            Toast.makeText(baseContext,"Вы ввели не все данные",Toast.LENGTH_SHORT).show()
+            }
+            ShedulesData.add( ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext, "schedules/$faculty/$group"))
+            getShedulesScreen()
+        } else {
+            Toast.makeText(baseContext, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
         }
     }
 
-    var back_pressed:Long = 0
+    var back_pressed: Long = 0
     override fun onBackPressed() {
         if (back_pressed + 2000 > System.currentTimeMillis())
             super.onBackPressed()
@@ -141,12 +106,13 @@ class MainActivity : AppCompatActivity() {
         back_pressed = System.currentTimeMillis()
     }
 
-    fun onClickNewShedBackButton(view: View){
+    fun onClickNewShedBackButton(view: View) {
         getShedulesScreen()
     }
-    fun onClickDeleteButton(view: View){
+
+    fun onClickDeleteButton(view: View) {
         val text = view.findViewById<TextView>(R.id.delete_button).text
-        for(i in 0 until ShedulesData.size) if(i.toString()==text.toString()){
+        for (i in 0 until ShedulesData.size) if (i.toString() == text.toString()) {
 
             val alertDialog = AlertDialog.Builder(this@MainActivity)
             alertDialog.setTitle("Вы уверены, что хотите это удалить?")
@@ -167,31 +133,32 @@ class MainActivity : AppCompatActivity() {
         getShedulesScreen()
     }
 
-    fun onClickShedule(view: View){
+    fun onClickShedule(view: View) {
         val text = view.findViewById<TextView>(R.id.delete_button).text.toString().toInt()
         val slider: ScreenPager = ScreenPager(baseContext)
-            for (i in 0 until ShedulesData[text].pairs_list.size){
-                val day = ShedulesData[text].pairs_list[i]
-                setContentView(R.layout.day_schedule)
-                val view:View = findViewById(R.id.Day_shedule)
-                val recyclerView = view.findViewById<RecyclerView>(R.id.Day_list)
-                findViewById<TextView>(R.id.day_data).text = day.date
-                findViewById<TextView>(R.id.day_name).text = i.toString()
-                recyclerView.layoutManager = LinearLayoutManager(this)
-                recyclerView.adapter = AdapterPairs(ShedulesData[text].pairs_list[i].lessons)
-                slider.addScreen(view)
-            }
+        for (i in 0 until ShedulesData[text].pairs_list.size) {
+            val day = ShedulesData[text].pairs_list[i]
+            setContentView(R.layout.day_schedule)
+            val view: View = findViewById(R.id.Day_shedule)
+            val recyclerView = view.findViewById<RecyclerView>(R.id.Day_list)
+            findViewById<TextView>(R.id.day_data).text = day.date.toString()
+            findViewById<TextView>(R.id.day_name).text = day.dayName.toString()
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = AdapterPairs(ShedulesData[text].pairs_list[i].lessons)
+            slider.addScreen(view)
+        }
         setContentView(slider)
     }
-    fun onClickMenu(view: View){
+
+    fun onClickMenu(view: View) {
         val item = view.findViewById<TextView>(R.id.item_text).text.toString()
-        when (item){
+        when (item) {
             "Расписания" -> getShedulesScreen()
             "Преподаватели" -> getTeachersScreen()
         }
     }
 
-    fun elem(a:Int){
+    fun elem(a: Int) {
 
     }
 

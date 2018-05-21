@@ -1,12 +1,13 @@
 package team_a.schedule.core.load
 
 import android.content.Context
+import com.beust.klaxon.Klaxon
 import team_a.schedule.core.rasp.Day
 import team_a.schedule.core.rasp.Lesson
 import team_a.schedule.core.rasp.Schedule
 import java.io.*
 
-class ScheduleSaveLoader {
+class ScheduleSaveLoader(var data:List<Schedule>) {
     //    fun LoadFromJSONString(JSONString: String): Schedule {
 //        val result = Klaxon().parse<Schedule>(JSONString)
 //                ?: Schedule("NullSchedule",
@@ -35,16 +36,17 @@ class ScheduleSaveLoader {
         val schedule = Schedule("NullSchedule",
                 "Null",
                 "Null",
+                "null",
                 "Null",
                 "null",
-                listOf(Day(listOf(Lesson("Null",
+                listOf(Day("null",
+                        "null",
+                        listOf(Lesson("Null",
                         "Null",
                         "Null",
                         "Null",
-                        "Null",
-                        "Null",
-                        "Форточка",
-                        "Null")))))
+                        "Форточка"
+                        )))))
 //тут предполагалась загрузка из интернета, но нам не написали обработку запроса
         return schedule
     }
@@ -61,10 +63,8 @@ class ScheduleSaveLoader {
     fun loadScheduleFromAssets(context: Context, fileName: String): Schedule {
         val assetManager = context.assets
             val inps = assetManager.open(fileName)
-            val ois = ObjectInputStream(inps)
-            val schedule: Schedule = ois.readObject() as Schedule
-            ois.close()
-            return schedule
+            val a = Klaxon().parse<Schedule>(inps.reader().readText())!!
+            return a
     }
 
 }

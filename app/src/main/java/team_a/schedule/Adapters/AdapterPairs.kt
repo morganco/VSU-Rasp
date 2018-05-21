@@ -21,7 +21,7 @@ class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.NameView?.text = values[position].name
-        holder.HallView?.text = values[position].num
+        holder.HallView?.text = values[position].hall
         holder.TeacherView?.text = values[position].prep
         when(position){
             0 -> holder.TimeView?.text = " 08:00   09:20 "
