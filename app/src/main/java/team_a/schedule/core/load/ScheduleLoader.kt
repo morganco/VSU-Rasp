@@ -1,13 +1,14 @@
 package team_a.schedule.core.load
 
 import android.content.Context
+import android.provider.ContactsContract
 import com.beust.klaxon.Klaxon
 import team_a.schedule.core.rasp.Day
 import team_a.schedule.core.rasp.Lesson
 import team_a.schedule.core.rasp.Schedule
 import java.io.*
 
-class ScheduleSaveLoader(var data:List<Schedule>) {
+class ScheduleSaveLoader() {
     //    fun LoadFromJSONString(JSONString: String): Schedule {
 //        val result = Klaxon().parse<Schedule>(JSONString)
 //                ?: Schedule("NullSchedule",
@@ -53,11 +54,17 @@ class ScheduleSaveLoader(var data:List<Schedule>) {
 
     fun saveScheduleToCacheDir(schedule: Schedule, context: Context, fileName: String) {
         val cacheDir = context.cacheDir
+        File(cacheDir,"/userdata").mkdir()
         val file = File(cacheDir, fileName)
         val os = FileOutputStream(file)
         val oos = ObjectOutputStream(os)
         oos.writeObject(schedule)
         oos.close()
+    }
+
+    fun removeScheduleFromCacheDir(context: Context,name:String){
+        val cacheDir = context.cacheDir
+        File(cacheDir,"/userdata/$name").delete()
     }
 
     fun loadScheduleFromAssets(context: Context, fileName: String): Schedule {
@@ -67,4 +74,21 @@ class ScheduleSaveLoader(var data:List<Schedule>) {
             return a
     }
 
+    fun getSavedData(context: Context):MutableList<Schedule> {
+        val dir = context.cacheDir
+        val path = "/userdata"
+        val list = File(dir, path).list()
+        val data = mutableListOf<Schedule>()
+        if  (list==null) return data
+        for (i in list) {
+            val file = File(dir, "/userdata/$i")
+            if (file.exists()) {
+                val inps = FileInputStream(file)
+                val ois = ObjectInputStream(inps)
+                data.add(ois.readObject() as Schedule)
+                ois.close()
+            }
+        }
+        return data
+    }
 }
