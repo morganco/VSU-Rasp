@@ -21,7 +21,8 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     var ShedulesData = mutableListOf<Schedule>()
-    val menuList = listOf("Расписания", "Преподаватели")
+    val menuList = listOf("РАСПИСАНИЯ", "ПРЕПОДАВАТЕЛИ","НАСТРОЙКИ")
+    var back_pressed: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ShedulesData = ScheduleSaveLoader(ShedulesData).getSavedData(baseContext)
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         val menurecyclerView = findViewById<RecyclerView>(R.id.menu_recycler)
         menurecyclerView.layoutManager = LinearLayoutManager(this)
         menurecyclerView.adapter = AdapterList(menuList)
+
+        getHiddenScreen()
     }
 
     private fun getTeachersScreen() {
@@ -52,11 +55,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = AdapterTeachers(Teacher().getTeachers(baseContext))
 
+        getHiddenScreen()
+    }
+
+    fun getHiddenScreen(){
         val menurecyclerView = findViewById<RecyclerView>(R.id.menu_recycler)
         menurecyclerView.layoutManager = LinearLayoutManager(this)
         menurecyclerView.adapter = AdapterList(menuList)
     }
-
 
     fun onClickSheduleButton(view: View) {
         setContentView(R.layout.new_schedule_list)
@@ -104,9 +110,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    var back_pressed: Long = 0
     override fun onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis())
+        if (back_pressed + 1000 > System.currentTimeMillis())
             super.onBackPressed()
         else {
             Toast.makeText(baseContext, "Нажмите еще раз, чтобы выйти",
@@ -163,9 +168,29 @@ class MainActivity : AppCompatActivity() {
     fun onClickMenu(view: View) {
         val item = view.findViewById<TextView>(R.id.item_text).text.toString()
         when (item) {
-            "Расписания" -> getShedulesScreen()
-            "Преподаватели" -> getTeachersScreen()
+            "РАСПИСАНИЯ" -> getShedulesScreen()
+            "ПРЕПОДАВАТЕЛИ" -> getTeachersScreen()
+            "НАСТРОЙКИ"->{setContentView(R.layout.settings_layout)
+                          getHiddenScreen()}
         }
+    }
+
+    fun onClickUpdate(view: View){
+        ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext,"data")
+        getShedulesScreen()
+        Toast.makeText(baseContext, "ДАННЫЕ ОБНОВЛЕНЫ",
+                Toast.LENGTH_SHORT).show()
+    }
+
+    fun onClickEraseCache(view: View){
+        val list = baseContext.cacheDir.list()
+        for (i in list){
+            File(baseContext.cacheDir,i).deleteRecursively()
+        }
+        ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext,"data")
+        File(baseContext.cacheDir,"firstlaunch").createNewFile()
+        Toast.makeText(baseContext, "КЭШ ОЧИЩЕН",
+                Toast.LENGTH_SHORT).show()
     }
 
     fun elem(a: Int) {

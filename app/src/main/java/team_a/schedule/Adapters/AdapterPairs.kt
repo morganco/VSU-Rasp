@@ -24,12 +24,12 @@ class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<Adapt
         holder.HallView?.text = values[position].hall
         holder.TeacherView?.text = values[position].prep
         when(position){
-            0 -> holder.TimeView?.text = "08:00\n09:20 "
-            1 -> holder.TimeView?.text = "09:35\n10:55 "
-            2 -> holder.TimeView?.text = "11:25\n12:45 "
-            3 -> holder.TimeView?.text = "13:00\n14:20 "
-            4 -> holder.TimeView?.text = "14:35\n15:55 "
-            5 -> holder.TimeView?.text = "16:10\n17:30 "
+            0 -> holder.TimeView?.text = "08:00\n 09:20"
+            1 -> holder.TimeView?.text = "09:35\n 10:55"
+            2 -> holder.TimeView?.text = "11:25\n 12:45"
+            3 -> holder.TimeView?.text = "13:00\n 14:20"
+            4 -> holder.TimeView?.text = "14:35\n 15:55"
+            5 -> holder.TimeView?.text = "16:10\n 17:30"
         }
         when(values[position].type){
             "лк" -> holder.TypeView?.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.lectureBackground))
