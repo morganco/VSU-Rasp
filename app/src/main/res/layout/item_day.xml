@@ -34,14 +34,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/item_pair_name"
                 android:text="@string/pair_name"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/textcolor"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/item_teacher_name"
                 android:text="@string/teacher_name"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:gravity="bottom"
                 android:textColor="@color/textcolor"/>
         </LinearLayout>
@@ -50,7 +50,7 @@
         android:layout_height="match_parent"
         android:id="@+id/item_hall_number"
         android:text="@string/hall_number"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:gravity="center"
         android:layout_marginLeft="5dp"
         android:textColor="@color/textcolor"/>

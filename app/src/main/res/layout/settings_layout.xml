@@ -13,7 +13,7 @@
             android:layout_height="50dp"
             android:background="@color/primaryButtons"
             android:textColor="@color/button_text"
-            android:text="ОБНОВИТЬ ДАННЫЕ"
+            android:text="@string/UpdateData"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -24,7 +24,7 @@
             android:layout_height="50dp"
             android:background="@color/primaryButtons"
             android:textColor="@color/button_text"
-            android:text="СБРОС НАСТРОЕК"
+            android:text="@string/RESET"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -35,11 +35,11 @@
             android:layout_height="50dp"
             android:background="@color/primaryButtons"
             android:textColor="@color/button_text"
-            android:text="ДОБАВИТЬ СВОЕ РАСПИСАНИЕ"
+            android:text="@string/CreateCustomSchedule"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:onClick="onClickEraseCache"/>
+            android:onClick="onClickCustomSchedule"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

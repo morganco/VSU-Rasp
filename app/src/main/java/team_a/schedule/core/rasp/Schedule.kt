@@ -9,7 +9,7 @@ data class Schedule(val serial: String,
                val group: String,
                val education_form: String?,
                val week_number: String?,
-               val pairs_list: List<Day>):Serializable{
+               val pairs_list: MutableList<Day>):Serializable{
     override fun toString(): String {
         return "{" +
                 "serial:\"$serial\"," +

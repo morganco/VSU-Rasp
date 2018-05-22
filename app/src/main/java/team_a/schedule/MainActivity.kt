@@ -1,5 +1,6 @@
 package team_a.schedule
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -13,16 +14,21 @@ import team_a.schedule.Adapters.AdapterList
 import team_a.schedule.Adapters.AdapterPairs
 import team_a.schedule.Adapters.AdapterScheduleList
 import team_a.schedule.Adapters.AdapterTeachers
+import team_a.schedule.core.CustomSchedule
 import team_a.schedule.core.load.ScheduleSaveLoader
+import team_a.schedule.core.rasp.Day
+import team_a.schedule.core.rasp.Lesson
 import team_a.schedule.core.rasp.Schedule
 import team_a.schedule.core.university.*
 import java.io.File
 
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
     var ShedulesData = mutableListOf<Schedule>()
     val menuList = listOf("РАСПИСАНИЯ", "ПРЕПОДАВАТЕЛИ","НАСТРОЙКИ")
     var back_pressed: Long = 0
+    var customSchedule = CustomSchedule(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ShedulesData = ScheduleSaveLoader(ShedulesData).getSavedData(baseContext)
@@ -34,9 +40,7 @@ class MainActivity : AppCompatActivity() {
         getShedulesScreen()
     }
 
-
-
-    private fun getShedulesScreen() {
+    fun getShedulesScreen() {
         setContentView(R.layout.schedules_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.shed_r)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -49,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         getHiddenScreen()
     }
 
-    private fun getTeachersScreen() {
+    fun getTeachersScreen() {
         setContentView(R.layout.teachers_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.teachers_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -178,6 +182,7 @@ class MainActivity : AppCompatActivity() {
     fun onClickUpdate(view: View){
         ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext,"data")
         getShedulesScreen()
+        ShedulesData.clear()
         Toast.makeText(baseContext, "ДАННЫЕ ОБНОВЛЕНЫ",
                 Toast.LENGTH_SHORT).show()
     }
@@ -193,14 +198,35 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
     }
 
-    fun elem(a: Int) {
-
+    fun onClickCustomSchedule(view: View){
+        customSchedule = CustomSchedule(this)
+        customSchedule.reset()
+        setContentView(R.layout.custom_schedule)
     }
 
+    fun onClickCustomDay(view: View){
+        customSchedule.onClickDay(view as Button)
+    }
+
+    fun onClickCustomAddLesson(view: View){
+        customSchedule.onClickAddLesson(view)
+    }
+
+    fun onClickCustomConfirmLesson(view: View){
+        customSchedule.onClickConfirmLesson(view)
+    }
+
+    fun onClickCustomBackLesson(view: View){
+        customSchedule.getDayScreen()
+    }
+
+    fun onClickCustomBackDay(view: View){
+        setContentView(R.layout.custom_schedule)
+    }
+
+    fun onClickCustomBackSchedule(view: View){
+        getTeachersScreen()
+    }
 }
-
-
-
-
 
 

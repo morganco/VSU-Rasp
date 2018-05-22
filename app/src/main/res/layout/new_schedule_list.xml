@@ -164,18 +164,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/faculty_spinner"
         android:orientation="vertical"/>
-
-    <Button
-        android:id="@+id/reset_schedule"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_shed_back"
-        android:background="@drawable/update"
-        android:onClick="onClickUpdate"/>
 </android.support.constraint.ConstraintLayout>

@@ -20,7 +20,7 @@
             <TextView
                 android:id="@+id/NameShedule"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30sp"
                 android:layout_marginLeft="5dp"
                 android:text="Name of Shedule"
                 android:textColor="@color/textcolor"
@@ -48,17 +48,20 @@
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/NameGroup" />
         </LinearLayout>
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/cross"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:textSize="0sp"
-            android:layout_marginRight="5dp"
-            app:layout_constraintRight_toRightOf = "@id/shedule_all"
-            android:gravity="center"
-            android:onClick="onClickDeleteButton"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/cross"
+        android:gravity="center"
+        android:onClick="onClickDeleteButton"
+        android:textSize="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/shedule_all"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -11,4 +11,11 @@
     <string name="teacher_name">ИМЯ ПРЕПОДА</string>
     <string name="Back">НАЗАД</string>
     <string name="EnterShedulesName">ВВЕДИТЕ НАЗВАНИЕ РАСПИСАНИЯ</string>
+    <string name="EnterLessonName">Введите название пары</string>
+    <string name="EnterTeacherName">Введите имя преподавателя</string>
+    <string name="EnterLessonHall">Введите аудиторию</string>
+    <string name="UpdateData">ОБНОВИТЬ ДАННЫЕ</string>
+    <string name="RESET">СБРОС НАСТРОЕК</string>
+    <string name="CreateCustomSchedule">ДОБАВИТЬ СВОЕ РАСПИСАНИЕ</string>
+    <string name="ADD">ДОБАВИТЬ</string>
 </resources>
