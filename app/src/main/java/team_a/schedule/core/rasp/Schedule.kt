@@ -1,24 +1,13 @@
 package team_a.schedule.core.rasp
 
-import team_a.schedule.core.rasp.Day
 import java.io.Serializable
 
-data class Schedule(val serial: String,
-               val name:String,
-               val faculty: String,
-               val group: String,
-               val education_form: String?,
-               val week_number: String?,
-               val pairs_list: MutableList<Day>):Serializable{
-    override fun toString(): String {
-        return "{" +
-                "serial:\"$serial\"," +
-                "name:\$name\","
-                "faculty:\"$faculty\"," +
-                "group:\"$group\"," +
-                "education_form:\"$education_form\"," +
-                "week_number:\"$week_number\"," +
-                "pairs_list:$pairs_list" +
-                "}"
-    }
+data class Schedule(var serial: String,
+               var name:String,
+               var faculty: String,
+               var group: String,
+               var education_form: String?,
+               var week_number: String?,
+               var pairs_list: MutableList<Day>):Serializable{
+
 }

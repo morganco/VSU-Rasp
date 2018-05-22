@@ -25,4 +25,6 @@
     <string name="day3">СРЕДА</string>
     <string name="day2">ВТОРНИК</string>
     <string name="day1">ПОНЕДЕЛЬНИК</string>
+    <string name="hh_mm">hh:mm</string>
+
 </resources>

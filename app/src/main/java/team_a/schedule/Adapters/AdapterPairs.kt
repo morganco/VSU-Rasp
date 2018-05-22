@@ -1,5 +1,6 @@
 package team_a.schedule.Adapters
 
+import android.annotation.SuppressLint
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,7 +11,7 @@ import android.widget.TextView
 import team_a.schedule.R
 import team_a.schedule.core.rasp.Lesson
 
-class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<AdapterPairs.ViewHolder>() {
+open class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<AdapterPairs.ViewHolder>() {
 
     override fun getItemCount() = values.size
 
@@ -19,10 +20,12 @@ class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<Adapt
         return ViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.NameView?.text = values[position].name
         holder.HallView?.text = values[position].hall
         holder.TeacherView?.text = values[position].prep
+        holder.IdView?.text = position.toString()
         when(position){
             0 -> holder.TimeView?.text = "08:00\n 09:20"
             1 -> holder.TimeView?.text = "09:35\n 10:55"
@@ -35,7 +38,7 @@ class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<Adapt
             "лк" -> holder.TypeView?.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.lectureBackground))
             "пр" -> holder.TypeView?.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.practicalBackground))
             "лб" -> holder.TypeView?.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.laboratoryBackground))
-            null -> holder.TypeView?.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.NonePair))
+            "" -> holder.TypeView?.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.NonePair))
         }
     }
 
@@ -45,12 +48,21 @@ class AdapterPairs(private val values: List<Lesson>): RecyclerView.Adapter<Adapt
         var HallView: TextView? = null
         var TimeView: TextView? = null
         var TypeView: LinearLayout? = null
+        var IdView: TextView? = null
         init {
             NameView = itemView.findViewById(R.id.item_pair_name)
             HallView = itemView.findViewById(R.id.item_hall_number)
             TeacherView = itemView.findViewById(R.id.item_teacher_name)
             TimeView = itemView.findViewById(R.id.item_pair_time)
             TypeView = itemView.findViewById(R.id.item_cell)
+            IdView = itemView.findViewById(R.id.lesson_id)
         }
+    }
+}
+
+class AdapterCustomePairs(values: List<Lesson>):AdapterPairs(values){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_custome_day, parent, false)
+        return ViewHolder(itemView)
     }
 }
