@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">Shedule</string>
+    <string name="app_name">VSU-RASP</string>
     <string name="WelcomeText">Добро Пожаловать в расписание ВГУ</string>
     <string name="FacultyHint">Введите свой факультет</string>
     <string name="GroupHint">Введите свою группу</string>
-    <string name="Add_New_Shedule_TextButton">Добавить новое расписание</string>
-    <string name="NameHint">Как Вас зовут?</string>
-    <string name="Confirm">Подтвердить</string>
-    <string name="pair_name">Название пары</string>
-    <string name="hall_number">Номер аудитории</string>
-    <string name="teacher_name">Имя препода</string>
-    <string name="Back">Назад</string>
-    <string name="EnterShedulesName">Введите название расписания</string>
+    <string name="Add_New_Shedule_TextButton">ДОБАВИТЬ НОВОЕ РАСПИСАНИЕ</string>
+    <string name="NameHint">КАК ВАС ЗОВУТ?</string>
+    <string name="Confirm">ПОДТВЕРДИТЬ</string>
+    <string name="pair_name">НАЗВАНИЕ ПАРЫ</string>
+    <string name="hall_number">НОМЕР АУДИТОРИИ</string>
+    <string name="teacher_name">ИМЯ ПРЕПОДА</string>
+    <string name="Back">НАЗАД</string>
+    <string name="EnterShedulesName">ВВЕДИТЕ НАЗВАНИЕ РАСПИСАНИЯ</string>
 </resources>

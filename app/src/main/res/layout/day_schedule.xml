@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/Day_shedule">
+    android:id="@+id/Day_shedule"
+    android:background="@drawable/background">
 
     <LinearLayout
         android:id="@+id/Day_Head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="28sp"
         android:orientation="horizontal"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp">
@@ -20,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name of Day"
-            android:textSize="20sp"
-            android:id="@+id/day_name"/>
+            android:textSize="25sp"
+            android:id="@+id/day_name" />
 
         <TextView
             android:id="@+id/day_data"
@@ -30,7 +31,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="dd.mm.yy"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
     </LinearLayout>
 
     <LinearLayout

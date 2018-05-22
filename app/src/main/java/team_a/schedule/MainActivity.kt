@@ -25,8 +25,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ShedulesData = ScheduleSaveLoader(ShedulesData).getSavedData(baseContext)
-        ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext,"data")
+
         if(!File(baseContext.cacheDir,"firstlaunch").exists()){
+            ScheduleSaveLoader(ShedulesData).loadScheduleFromAssets(baseContext,"data")
             File(baseContext.cacheDir,"firstlaunch").createNewFile()
         }
         getShedulesScreen()
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun getShedulesScreen() {
+    private fun getShedulesScreen() {
         setContentView(R.layout.schedules_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.shed_r)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         menurecyclerView.adapter = AdapterList(menuList)
     }
 
-    fun getTeachersScreen() {
+    private fun getTeachersScreen() {
         setContentView(R.layout.teachers_layout)
         val recyclerView = findViewById<RecyclerView>(R.id.teachers_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -60,14 +61,13 @@ class MainActivity : AppCompatActivity() {
     fun onClickSheduleButton(view: View) {
         setContentView(R.layout.new_schedule_list)
         val data = University(baseContext).constructor()
-        val faculty_adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data.getFaculties())
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayListOf())
+        val faculty_adapter = ArrayAdapter<String>(this, R.layout.item_spinner, data.getFaculties())
+        val adapter = ArrayAdapter<String>(this, R.layout.item_spinner, arrayListOf())
 
-        faculty_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        faculty_adapter.setDropDownViewResource(R.layout.item_spinner)
         var spinner = findViewById<View>(R.id.faculty_spinner) as Spinner
         spinner.adapter = faculty_adapter
         spinner.setSelection(0)
-
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             val data = ScheduleSaveLoader(ShedulesData).loadScheduleFromCacheDir(baseContext,"schedules/$faculty/$group")
-            //val data = ScheduleSaveLoader(null).loadScheduleFromAssets(baseContext, "schedules/$faculty/$group")
             ShedulesData.add(Schedule(data.serial,name,faculty,group,data.education_form,data.week_number,data.pairs_list))
             ScheduleSaveLoader(ShedulesData).saveScheduleToCacheDir(ShedulesData[ShedulesData.size - 1],baseContext,"userdata/$name")
             getShedulesScreen()
@@ -128,8 +127,7 @@ class MainActivity : AppCompatActivity() {
             val alertDialog = AlertDialog.Builder(this@MainActivity)
             alertDialog.setTitle("Вы уверены, что хотите это удалить?")
 
-            alertDialog.setIcon(R.drawable.index)
-
+            alertDialog.setIcon(R.drawable.cross)
             alertDialog.setPositiveButton("ДА", DialogInterface.OnClickListener { dialog, which ->
                 ScheduleSaveLoader(ShedulesData).removeScheduleFromCacheDir(baseContext,ShedulesData[i].name)
                 ShedulesData.removeAt(i)
