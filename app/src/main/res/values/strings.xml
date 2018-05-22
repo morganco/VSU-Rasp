@@ -18,4 +18,11 @@
     <string name="RESET">СБРОС НАСТРОЕК</string>
     <string name="CreateCustomSchedule">ДОБАВИТЬ СВОЕ РАСПИСАНИЕ</string>
     <string name="ADD">ДОБАВИТЬ</string>
+    <string name="CANCEL">ОТМЕНА</string>
+    <string name="day6">СУББОТА</string>
+    <string name="day5">ПЯТНИЦА</string>
+    <string name="day4">ЧЕТВЕРГ</string>
+    <string name="day3">СРЕДА</string>
+    <string name="day2">ВТОРНИК</string>
+    <string name="day1">ПОНЕДЕЛЬНИК</string>
 </resources>

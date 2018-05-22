@@ -13,16 +13,19 @@ import team_a.schedule.core.rasp.Schedule
 
 class CustomSchedule(val context: MainActivity){
     var schedule = Schedule("","","","","","", mutableListOf())
-    var day = Day("","", mutableListOf())
-
+    //var day = Day("","", mutableListOf())
+    var position:Int = 0
     fun getDayScreen(){
         context.setContentView(R.layout.custom_day)
+        //Toast.makeText(context.baseContext, schedule.pairs_list[position].lessons[0].name, Toast.LENGTH_SHORT).show()
         val recyclerView = context.findViewById<RecyclerView>(R.id.recycler_custom_day)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = AdapterPairs(day.lessons)
+        recyclerView.adapter = AdapterPairs(schedule.pairs_list[position].lessons)
     }
     fun onClickDay(view: Button){
-        day.dayName = view.text.toString()
+        val name  = view.text.toString()
+        position = getDayNumber(name)
+        schedule.pairs_list[position].dayName = name
         getDayScreen()
     }
     fun onClickAddLesson(view: View){
@@ -47,32 +50,34 @@ class CustomSchedule(val context: MainActivity){
             }
         }
         if(name!="" && teacher!="" && hall!="" && type!=""){
-            day.lessons.add(Lesson(name,teacher,hall,"",type))
+            schedule.pairs_list[position].lessons.add(Lesson(name,teacher,hall,"",type))
             getDayScreen()
         }
         else Toast.makeText(context.baseContext, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
     }
 
     fun reset(){
-        day = Day("","", mutableListOf())
         val data = mutableListOf<Day>()
         for(i in 0 until 6){
+            val a = mutableListOf<Lesson>(Lesson(i.toString(),"","","",""))
+            val day = Day("","", mutableListOf())
            data.add(day)
         }
         schedule = Schedule("","","ПОЛЬЗОВАТЕЛЬСКОЕ","","","",data)
     }
 
-    fun onClickConfirmDay(view: View){
-        val i:Int
-        when(day.dayName){
-            "ПОНЕДЕЛЬНИК" -> i = 0
-            "ВТОРНИК" -> i = 1
-            "СРЕДА" -> i = 2
-            "ЧЕТВЕРГ" -> i = 3
-            "ПЯТНИЦА" -> i = 4
-            "СУББОТА" -> i = 5
+    fun getDayNumber(s:String): Int{
+        when(s){
+            "ПОНЕДЕЛЬНИК" -> return 0
+            "ВТОРНИК" -> return 1
+            "СРЕДА" -> return 2
+            "ЧЕТВЕРГ" -> return 3
+            "ПЯТНИЦА" -> return 4
+            "СУББОТА" -> return 5
         }
-        schedule.pairs_list.add(day)
-        day = Day("","", mutableListOf())
+        return 0
+    }
+    fun onClickConfirmDay(view: View){
+
     }
 }

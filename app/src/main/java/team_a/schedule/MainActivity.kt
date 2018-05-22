@@ -217,6 +217,7 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun onClickCustomBackLesson(view: View){
+        //customSchedule.day = Day("","", mutableListOf())
         customSchedule.getDayScreen()
     }
 
@@ -226,6 +227,11 @@ open class MainActivity : AppCompatActivity() {
 
     fun onClickCustomBackSchedule(view: View){
         getTeachersScreen()
+    }
+
+    fun onClickCustomConfirmDay(view: View){
+        customSchedule.onClickConfirmDay(view)
+        setContentView(R.layout.custom_schedule)
     }
 }
 
